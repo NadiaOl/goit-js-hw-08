@@ -31,13 +31,14 @@ function populateTextarea() {
 try {
     if (savedMessageParse.email) {
         refs.input.value = savedMessageParse.email;
+        formData.email = savedMessageParse.email;
     }; } catch (error) {}
 try {
     if (savedMessageParse.message) {
         refs.textarea.value = savedMessageParse.message;
+        formData.message = savedMessageParse.message;
     };
-} catch (error) { }
-
+} catch (error) {}
 }
 
 //обнуляемся при сабмите
