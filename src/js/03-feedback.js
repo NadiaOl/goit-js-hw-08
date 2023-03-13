@@ -11,7 +11,7 @@ const refs = {
 };
 
 // создаем объкт {email: ...., message: .... }
-const formData = {};
+let formData = {};
 
 //добавляем слушателей
 refs.form.addEventListener('submit', handelFormSubmit);
@@ -49,6 +49,8 @@ function handelFormSubmit(event) {
         event.currentTarget.reset();
         localStorage.removeItem(STORAGE_KEY);
         console.log(formData);
+        formData = {},
+        console.log(formData);  
         refs.form.removeEventListener('submit', handelFormSubmit)
     }
 }
