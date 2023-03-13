@@ -35,7 +35,9 @@ try {
 try {
     if (savedMessageParse.message) {
         refs.textarea.value = savedMessageParse.message;
-    }; } catch (error) {}
+    };
+} catch (error) { }
+
 }
 
 //обнуляемся при сабмите
@@ -49,9 +51,7 @@ function handelFormSubmit(event) {
         event.currentTarget.reset();
         localStorage.removeItem(STORAGE_KEY);
         console.log(formData);
-        formData = {},
-        console.log(formData);  
-        refs.form.removeEventListener('submit', handelFormSubmit)
+        formData = {};
     }
 }
 
