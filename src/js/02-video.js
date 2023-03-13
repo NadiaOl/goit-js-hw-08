@@ -15,7 +15,7 @@ const playerON = player.on('timeupdate', throttle(getPosition, 1000))
 //автовоспроизведение
 const pausedTime = localStorage.getItem("videoplayer-current-time");
 const startTime = JSON.parse(pausedTime);
-
+try {
 player.setCurrentTime(startTime.seconds || 0).then(function(seconds) {
 
 }).catch(function(error) {
@@ -26,3 +26,6 @@ player.setCurrentTime(startTime.seconds || 0).then(function(seconds) {
             break;
     }
 });
+} catch (error) {
+
+}
