@@ -20,30 +20,36 @@ refs.form.addEventListener('input', throttle(handelInput, 500));
 // получаем данные для хранилища
 function handelInput(event) {
     formData[event.target.name] = event.target.value;
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
-//обнуляемся при сабмите
+//создаем "автосохранение"
 populateTextarea();
-
-function handelFormSubmit(event) {
-    event.preventDefault();
-
-    event.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    console.log(formData);
-}
-
-//заполняем поля "автосохранение"
 function populateTextarea() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
     const savedMessageParse = JSON.parse(savedMessage);
-    
-    if (savedMessageParse) {
+try {
+    if (savedMessageParse.email) {
         refs.input.value = savedMessageParse.email;
+    }; } catch (error) {}
+try {
+    if (savedMessageParse.message) {
         refs.textarea.value = savedMessageParse.message;
-    }
+    }; } catch (error) {}
+}
 
+//обнуляемся при сабмите
+function handelFormSubmit(event) {
+
+    event.preventDefault();
+
+    if (!formData.email || !formData.message) {
+        return
+    } else {
+        event.currentTarget.reset();
+        localStorage.removeItem(STORAGE_KEY);
+        console.log(formData);
+        refs.form.removeEventListener('submit', handelFormSubmit)
+    }
 }
 
